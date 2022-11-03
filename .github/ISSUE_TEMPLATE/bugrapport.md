@@ -1,4 +1,4 @@
-﻿---
+---
 name: Bugrapport
 about: Maak een rapport om ons te helpen verbeteren
 title: ''

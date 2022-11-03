@@ -1,4 +1,4 @@
-﻿---
+---
 name: Scene functieverzoek
 about: Een scene idee voor dit project voorstellen
 title: ''
