@@ -5,11 +5,27 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] protected float damage;
-    protected void OnTriggerEnter2D(Collider2D collision)
+    private EnemyMovement movement;
+
+    private void Awake()
     {
-        if (collision.tag == "Player")
+        movement = GetComponent<EnemyMovement>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
         {
-            //collision.GetComponent<Health>()?.TakeDamage(damage);
+            //collision.gameObject.GetComponent<Health>()?.TakeDamage(damage);
+            if (!movement.playerCollision)
+            {
+                movement.playerCollision = true;
+            }
+        } else
+        {
+            if (movement.playerCollision)
+                movement.playerCollision = false;
+
         }
     }
 }
