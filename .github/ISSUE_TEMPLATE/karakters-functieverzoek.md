@@ -7,23 +7,23 @@ assignees: ''
 
 ---
 
-**Karakter naam**
+### Karakter naam
 <!-- Het characters naam.-->
 
-**Achtergrond verhaal**
+### Achtergrond verhaal
 <!-- Een beschrijving van de karakters achtergrond.-->
 
-**Persoonlijkheid**
+### Persoonlijkheid
 <!-- Een beschrijving van de karakters persoonlijkheid.-->
 
-**Uiterlijk**
+### Uiterlijk
 <!-- Een beschrijving van de karakters uiterlijk met eventuele screenshots.-->
 
-**Capaciteiten**
+### Capaciteiten
 <!-- Een beschrijving van de karakters capiciteiten.-->
 
-**Extra’s**
+### Extra’s
 <!-- Een beschrijving van de karakters capiciteiten.-->
 
-**Relaties met andere karakters**
+### Relaties met andere karakters
 <!-- De relaties die dit karakter heeft met andere karakters.-->

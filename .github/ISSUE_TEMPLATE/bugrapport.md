@@ -7,13 +7,13 @@ assignees: ''
 
 ---
 
-**Beschrijf de bug**
+### Beschrijf de bug
 <!-- Een duidelijke en beknopte beschrijving van wat de bug is.-->
 
-**Verwacht gedrag**
+### Verwacht gedrag
 <!-- Een duidelijke en beknopte beschrijving van wat u verwachtte dat er zou gebeuren.-->
 
-**Te reproduceren**
+### Te reproduceren
 <!--
 Stappen om het gedrag te reproduceren:
 1. Ga naar '...'
@@ -22,9 +22,9 @@ Stappen om het gedrag te reproduceren:
 4. Zie fout
 -->
 
-**Schermafbeeldingen**
+### Schermafbeeldingen
 <!-- Voeg, indien van toepassing, schermafbeeldingen toe om uw probleem uit te leggen.-->
 
 
-**Aanvullende context**
+### Aanvullende context
 <!-- Voeg hier een andere context over het probleem toe. -->

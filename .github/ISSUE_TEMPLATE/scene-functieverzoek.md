@@ -7,14 +7,14 @@ assignees: ''
 
 ---
 
-**Scene naam**
+### Scene naam
 <!-- De scenes naam.-->
 
-**Samenvatting**
+### Samenvatting
 <!-- Een samenvatting van de scene.-->
 
-**Inleiding**
+### Inleiding
 <!-- Een uitleg van de backstory voor hoe je bij dit level komt.-->
 
-**Details**
+### Details
 <!-- Een gedetailleerde uitleg van dit level.-->
