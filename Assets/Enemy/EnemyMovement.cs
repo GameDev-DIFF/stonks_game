@@ -15,6 +15,8 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 initScale;
     private bool movingLeft = true;
 
+    public bool playerCollision = false;
+
     private void Awake()
     {
         initScale = transform.localScale;
@@ -23,18 +25,21 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (movingLeft)
-        {
-            if (transform.position.x >= leftEdge.position.x)
-                MoveInDirection(-1);
+        if (!playerCollision) { 
+            if (movingLeft)
+            {
+                if (transform.position.x >= leftEdge.position.x)
+                    MoveInDirection(-1);
+                else
+                    movingLeft = false;
+            }
             else
-                movingLeft = false;
-        } else
-        {
-            if (transform.position.x <= rightEdge.position.x)
-                MoveInDirection(1);
-            else
-                movingLeft = true;
+            {
+                if (transform.position.x <= rightEdge.position.x)
+                    MoveInDirection(1);
+                else
+                    movingLeft = true;
+            }
         }
     }
 
