@@ -21,11 +21,11 @@ public class EnemyAttack : MonoBehaviour
             {
                 movement.playerCollision = true;
             }
-        } else
-        {
-            if (movement.playerCollision)
-                movement.playerCollision = false;
+        } 
+    }
 
-        }
+    private void OnCollisionExit(Collision collision)
+    {
+        movement.playerCollision = false;
     }
 }
