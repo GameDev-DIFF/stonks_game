@@ -1,7 +1,7 @@
 ---
 name: Karakters functieverzoek
 about: Een character idee voor dit project voorstellen
-title: 'Karakter:'
+title: 'Karakter: '
 labels: enhancement, karakters
 assignees: ''
 

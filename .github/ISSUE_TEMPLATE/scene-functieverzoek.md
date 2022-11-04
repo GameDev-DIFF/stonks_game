@@ -1,7 +1,7 @@
 ---
 name: Scene functieverzoek
 about: Een scene idee voor dit project voorstellen
-title: ''
+title: 'Scene: '
 labels: enhancement, scenes
 assignees: ''
 

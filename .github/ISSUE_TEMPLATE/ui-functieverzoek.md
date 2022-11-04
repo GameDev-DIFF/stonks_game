@@ -1,7 +1,7 @@
 ---
 name: UI functieverzoek
 about: Een UI idee voor dit project voorstellen
-title: ''
+title: 'UI: '
 labels: enhancement, UI
 assignees: ''
 
