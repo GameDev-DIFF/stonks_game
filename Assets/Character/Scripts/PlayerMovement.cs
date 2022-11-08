@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(0, 0);
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -22,12 +23,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Moves the player accross the horizontal axis.
+        /*        horizontalInput = InputManager.Instance.GetMoveAxis();*/
+
         horizontalInput = Input.GetAxis("Horizontal");
 
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        if (horizontalInput != 0)
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
         // Checks if the player wants to jump
-        if (Input.GetKey(KeyCode.Space))
+        if (InputManager.Instance.GetKey(KeyBindingAction.Jump))
         {
             Jump();
         }
