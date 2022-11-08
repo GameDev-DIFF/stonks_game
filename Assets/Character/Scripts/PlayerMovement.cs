@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
         /*        horizontalInput = InputManager.Instance.GetMoveAxis();*/
 
         horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log(horizontalInput);
 
         if (horizontalInput != 0)
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
