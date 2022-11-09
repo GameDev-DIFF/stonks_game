@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private KeyBindings _keyBindings;
-
     private static InputManager _instance;
     public static InputManager Instance { get { return _instance; } }
+    [SerializeField]
+    private KeyBoundAction[] KeyBoundActions;
+    private Dictionary<string, KeyBoundAction> _keyBoundActions = new Dictionary<string, KeyBoundAction>();
+    private Dictionary<string, KeyBoundAction> _defaultKeyBoundActionValues = new Dictionary<string, KeyBoundAction>();
+    [SerializeField]
+    private Axis[] Axes;
+    private Dictionary<string, Axis> _axes = new Dictionary<string, Axis>();
+    private Dictionary<string, Axis> _defaultAxisValues = new Dictionary<string, Axis>();
 
-    void Awake()
+    private void Awake()
     {
         if (_instance == null)
         {
@@ -21,158 +27,198 @@ public class InputManager : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(this);
-        InitKeyBindings(); // Initalize KeyBindings Object
-        SetDefault(); // Set KeyBindings to default values
+        InitKeyBindings(); // Initialize KeyBindings
+        SetDefault(); // Set KeyBinding Values to Default
+    }
+
+    private void Update()
+    {
+        foreach (Axis axis in _axes.Values)
+        {
+            axis.Update();
+        }
     }
 
     /// <summary>
-    /// Initializes the KeyBindings 
+    /// Initializes the KeyBindings
     /// </summary>
     private void InitKeyBindings()
     {
-        _keyBindings = ScriptableObject.CreateInstance<KeyBindings>();
-        KeyBindingAction[] keyBindingActions = (KeyBindingAction[])Enum.GetValues(typeof(KeyBindingAction));
-        _keyBindings.KeyBindingChecks = new KeyBindings.KeyBindingCheck[keyBindingActions.Length];
-        foreach (KeyBindingAction keyBindingAction in keyBindingActions)
+        foreach (KeyBoundAction keyBoundAction in KeyBoundActions)
         {
-            KeyBindings.KeyBindingCheck newKeyBinding = new KeyBindings.KeyBindingCheck();
-            newKeyBinding.keyBindingAction = keyBindingAction;
-            newKeyBinding.keyCode = new KeyCode[] { KeyCode.None };
-            int index = (int)keyBindingAction;
-            _keyBindings.KeyBindingChecks.SetValue(newKeyBinding, index);
+            _defaultKeyBoundActionValues.Add(keyBoundAction.Name, keyBoundAction);
         }
+        Array.Clear(KeyBoundActions, 0, KeyBoundActions.Length);
+        foreach (Axis axis in Axes)
+        {
+            _defaultAxisValues.Add(axis.Name, axis);
+        }
+        Array.Clear(Axes, 0, Axes.Length);
     }
 
     /// <summary>
-    /// Sets all KeyBindingAction KeyCodes to their default value.
+    /// Sets all KeyBindings to their default value.
     /// </summary>
     public void SetDefault()
     {
-        SetKeyForAction(KeyBindingAction.MoveLeft, new KeyCode[] { KeyCode.LeftArrow });
-        SetKeyForAction(KeyBindingAction.MoveRight, new KeyCode[] { KeyCode.RightArrow });
-        SetKeyForAction(KeyBindingAction.Jump, new KeyCode[] { KeyCode.Space });
+        _keyBoundActions = _defaultKeyBoundActionValues;
+        _axes = _defaultAxisValues;
     }
 
     /// <summary>
-    /// Gets the currenly set KeyCodes for a KeyBindingAction.
+    /// Gets the currenly set values for a KeyBoundAction.
     /// </summary>
-    /// <param name="keyBindingAction">The KeyBindingAction you want the KeyCodes from</param>
-    /// <returns>An array containing the currently set KeyCodes</returns>
-    public KeyCode[] GetKeyForAction(KeyBindingAction keyBindingAction)
+    /// <param name="actionName">The name of the action you want the values from.</param>
+    /// <returns>The current KeyBoundAction values</returns>
+    public KeyBoundAction GetKeyBoundActionValues(string actionName)
     {
-        foreach (KeyBindings.KeyBindingCheck keyBindingCheck in _keyBindings.KeyBindingChecks)
+        if (_keyBoundActions.ContainsKey(actionName))
         {
-            if (keyBindingCheck.keyBindingAction == keyBindingAction)
-            {
-                return keyBindingCheck.keyCode;
-            }
+            return _keyBoundActions[actionName];
         }
-        return new KeyCode[] { KeyCode.None };
-    }
-
-    /// <summary>
-    /// Sets a new array of KeyCodes for an action.
-    /// </summary>
-    /// <param name="keyBindingAction">The action to assign new KeyCodes to.</param>
-    /// <param name="newKeyCode">The array of KeyCodes to assign to the action.</param>
-    public void SetKeyForAction(KeyBindingAction keyBindingAction, KeyCode[] newKeyCode)
-    {
-        foreach (KeyBindings.KeyBindingCheck keyBindingCheck in _keyBindings.KeyBindingChecks)
+        else
         {
-            if (keyBindingCheck.keyBindingAction == keyBindingAction)
-            {
-                keyBindingCheck.keyCode = newKeyCode;
-            }
+            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
         }
     }
 
     /// <summary>
-    /// Checks if all keys of an action are pressed down.
+    /// Sets a new values to an KeyBoundAction.
     /// </summary>
-    /// <param name="keyBindingAction">The action which keys are checked.</param>
+    /// <param name="newActionValues">The set of values to assign to a KeyBoundAction.</param>
+    public void SetKeyBoundActionValues(KeyBoundAction newActionValues)
+    {
+        if (_keyBoundActions.ContainsKey(newActionValues.Name))
+        {
+            _keyBoundActions.Add(newActionValues.Name, newActionValues);
+        }
+        else
+        {
+            throw new KeyNotFoundException("Could find " + '"' + newActionValues.Name + '"' + " action!");
+        }
+    }
+
+    /// <summary>
+    /// Gets the currenly set values for a Axis.
+    /// </summary>
+    /// <param name="axisName">The name of the axis you want the values from.</param>
+    /// <returns>The current Axis values</returns>
+    public Axis GetAxisValues(string axisName)
+    {
+        if (_axes.ContainsKey(axisName))
+        {
+            return _axes[axisName];
+        }
+        else
+        {
+            throw new KeyNotFoundException("Could not find " + '"' + axisName + '"' + " axis!");
+        }
+    }
+
+    /// <summary>
+    /// Sets a new values to an Axis.
+    /// </summary>
+    /// <param name="newAxisValues">The set of values to assign to a Axis.</param>
+    public void SetAxisValues(Axis newAxisValues)
+    {
+        if (_axes.ContainsKey(newAxisValues.Name))
+        {
+            _axes.Add(newAxisValues.Name, newAxisValues);
+        }
+        else
+        {
+            throw new KeyNotFoundException("Could not find " + '"' + newAxisValues.Name + '"' + " axis!");
+        }
+    }
+
+    /// <summary>
+    /// Checks if any of the bound keys of an action are pressed down.
+    /// </summary>
+    /// <param name="actionName">The name of the action which keys are checked.</param>
     /// <returns>Either false or true.</returns>
-    public bool GetKeyDown(KeyBindingAction keyBindingAction)
+    public bool GetKeyDown(string actionName)
     {
-        foreach (KeyBindings.KeyBindingCheck keyBindingCheck in _keyBindings.KeyBindingChecks)
+        if (_keyBoundActions.ContainsKey(actionName))
         {
-            if (keyBindingCheck.keyBindingAction == keyBindingAction)
+            KeyBoundAction action = _keyBoundActions[actionName];
+            if (Input.GetKeyDown(action.Button) || Input.GetKeyDown(action.AltButton))
             {
-                foreach (KeyCode keyCode in keyBindingCheck.keyCode)
-                {
-                    if (!Input.GetKeyDown(keyCode))
-                    {
-                        return false;
-                    }
-                }
                 return true;
             }
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// Checks if all keys of an action are pressed and hold.
-    /// </summary>
-    /// <param name="keyBindingAction">The action which keys are checked.</param>
-    /// <returns>Either false or true.</returns>
-    public bool GetKey(KeyBindingAction keyBindingAction)
-    {
-        foreach (KeyBindings.KeyBindingCheck keyBindingCheck in _keyBindings.KeyBindingChecks)
-        {
-            if (keyBindingCheck.keyBindingAction == keyBindingAction)
+            else
             {
-                foreach (KeyCode keyCode in keyBindingCheck.keyCode)
-                {
-                    if (!Input.GetKey(keyCode))
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                return false;
             }
         }
-        return false;
+        else
+        {
+            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+        }
     }
 
     /// <summary>
-    /// Checks if all keys of an action are released.
+    /// Checks if any of the bound keys of an action are pressed and held.
     /// </summary>
-    /// <param name="keyBindingAction">The action which keys are checked.</param>
+    /// <param name="actionName">The name of the action which keys are checked.</param>
     /// <returns>Either false or true.</returns>
-    public bool GetKeyUp(KeyBindingAction keyBindingAction)
+    public bool GetKey(string actionName)
     {
-        foreach (KeyBindings.KeyBindingCheck keyBindingCheck in _keyBindings.KeyBindingChecks)
+        if (_keyBoundActions.ContainsKey(actionName))
         {
-            if (keyBindingCheck.keyBindingAction == keyBindingAction)
+            KeyBoundAction action = _keyBoundActions[actionName];
+            if (Input.GetKey(action.Button) || Input.GetKey(action.AltButton))
             {
-                foreach (KeyCode keyCode in keyBindingCheck.keyCode)
-                {
-                    if (!Input.GetKeyUp(keyCode))
-                    {
-                        return false;
-                    }
-                }
                 return true;
             }
+            else
+            {
+                return false;
+            }
         }
-        return false;
+        else
+        {
+            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+        }
     }
 
     /// <summary>
-    /// Gets the current X axis move direction.
+    /// Checks if any of the bound keys of an action are released.
     /// </summary>
-    /// <returns>A float of value -1, 0 or 1</returns>
-    public float GetMoveAxis()
+    /// <param name="actionName">The name of the action which keys are checked.</param>
+    /// <returns>Either false or true.</returns>
+    public bool GetKeyUp(string actionName)
     {
-        float axis = 0;
-        if (GetKey(KeyBindingAction.MoveLeft))
+        if (_keyBoundActions.ContainsKey(actionName))
         {
-            axis -= 1;
+            KeyBoundAction action = _keyBoundActions[actionName];
+            if (Input.GetKeyUp(action.Button) || Input.GetKeyUp(action.AltButton))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        if (GetKey(KeyBindingAction.MoveRight))
+        else
         {
-            axis += 1;
+            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
         }
-        return axis;
+    }
+
+    /// <summary>
+    /// Checks if any of the bound keys of an axis are pressed and gets its current value.
+    /// </summary>
+    /// <returns>The current float value of the axis</returns>
+    public float GetAxis(string axisName)
+    {
+        if (_axes.ContainsKey(axisName))
+        {
+            return _axes[axisName].GetCurrentValue();
+        }
+        else
+        {
+            throw new KeyNotFoundException("Could find " + '"' + axisName + '"' + " axis!");
+        }
     }
 }
