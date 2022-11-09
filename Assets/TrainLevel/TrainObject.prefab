@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 161662322}
   - component: {fileID: 161662323}
   - component: {fileID: 3613222260760643009}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BackConnecter
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 161662321}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3dcf85cfb155ae147898dee680dca6b8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -122,9 +122,9 @@ GameObject:
   - component: {fileID: 1482111785}
   - component: {fileID: 1482111786}
   - component: {fileID: 7529580410781593002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FrontConnecter
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,7 +205,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1482111784}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3dcf85cfb155ae147898dee680dca6b8, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -262,6 +262,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7227025860601548385}
     m_Modifications:
+    - target: {fileID: 7979408476483582623, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979408476483582623, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7979408476861787586, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
       propertyPath: m_Name
       value: Train
@@ -309,6 +317,14 @@ PrefabInstance:
     - target: {fileID: 7979408476861787587, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979408478106756569, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979408478106756569, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3c0d717031ec6e469ee744c300c498b, type: 3}
