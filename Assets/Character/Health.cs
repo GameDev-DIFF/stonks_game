@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
 
+    [SerializeField] private GameObject startPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,8 @@ public class Health : MonoBehaviour
         else
         {
             GetComponent<PlayerMovement>().enabled = false;
+            player.transform.position = startPoint.transform.position;
+            GetComponent<PlayerMovement>().enabled = true;
         }
     }
     private IEnumerator Invunerability()
