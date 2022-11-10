@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // Gets the velocity from the rigidbody for the x axis and adds an amount to the y axis.
-        if (isGrounded())
+        if (IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
     }
 
-    private bool isGrounded()
+    public bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
