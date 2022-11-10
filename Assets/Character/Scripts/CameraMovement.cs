@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
         {
             case > 3f:
             {
-                if (playerMovement.IsGrounded())
+                if (playerMovement.isGrounded())
                 {
                     isHigh = true;
                 }
