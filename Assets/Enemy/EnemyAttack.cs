@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
         movement = GetComponent<EnemyMovement>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -20,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
 
             var force = transform.position - collision.transform.position;
             force.Normalize();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(-force.x, force.y * 2, force.z) * 500);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(-force.x, force.y * 2, force.z) * 10, ForceMode2D.Impulse);
 
             if (!movement.playerCollision)
             {
@@ -30,7 +30,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         movement.playerCollision = false;
     }
