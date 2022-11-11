@@ -925,7 +925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1549786963444301828, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2636893
+      value: -3.69
       objectReference: {fileID: 0}
     - target: {fileID: 1549786963444301828, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1549786963444301850, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1549786963819050870, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
       propertyPath: m_Layer
@@ -995,7 +995,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1549786963444301849, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44543ee5727f24248a7e94bd3a49bcbf, type: 3}
 --- !u!4 &807537740 stripped
 Transform:
@@ -1074,7 +1075,6 @@ Transform:
   - {fileID: 1585610134}
   - {fileID: 1564158296}
   - {fileID: 288902181}
-
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1969,14 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914c322069c054b408d2c057f2e75d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   target: {fileID: 1981310353}
-
-  speed: 5
-  player: {fileID: 1981310353}
-  aheadDistance: 3
-  cameraSpeed: 3
-
 --- !u!1 &1726071139
 GameObject:
   m_ObjectHideFlags: 0
