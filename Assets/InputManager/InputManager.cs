@@ -78,7 +78,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+            throw new KeyNotFoundException("Could not find " + '"' + actionName + '"' + " action!");
         }
     }
 
@@ -94,7 +94,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + newActionValues.Name + '"' + " action!");
+            throw new KeyNotFoundException("Could not find " + '"' + newActionValues.Name + '"' + " action!");
         }
     }
 
@@ -152,7 +152,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+            throw new KeyNotFoundException("Could not find " + '"' + actionName + '"' + " action!");
         }
     }
 
@@ -177,7 +177,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+            throw new KeyNotFoundException("Could not find " + '"' + actionName + '"' + " action!");
         }
     }
 
@@ -202,7 +202,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + actionName + '"' + " action!");
+            throw new KeyNotFoundException("Could not find " + '"' + actionName + '"' + " action!");
         }
     }
 
@@ -218,7 +218,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            throw new KeyNotFoundException("Could find " + '"' + axisName + '"' + " axis!");
+            throw new KeyNotFoundException("Could not find " + '"' + axisName + '"' + " axis!");
         }
     }
 }
