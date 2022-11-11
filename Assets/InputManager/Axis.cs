@@ -35,7 +35,6 @@ public class Axis
             if (Snap && (currentValue > 0 && targetValue < 0 || currentValue < 0 && targetValue > 0))
             {
                 currentValue = 0;
-                Debug.Log("Snapped to 0");
             }
             currentValue = Mathf.MoveTowards(currentValue, targetValue, Sensitivity * Time.deltaTime);
         }
