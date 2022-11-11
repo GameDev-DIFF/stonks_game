@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd34124a-5873-4242-b263-c441d97247a3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Character/Scripts/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Character/Scripts/CameraMovement.cs" afterDir="false" />
-    </list>
+    <list default="true" id="fd34124a-5873-4242-b263-c441d97247a3" name="Changes" comment="IsGround with capital letter? Changed it to the right variable" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +45,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668087296530</updated>
-      <workItem from="1668087299621" duration="481000" />
+      <workItem from="1668087299621" duration="620000" />
     </task>
     <servers />
   </component>

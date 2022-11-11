@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     private SpriteRenderer spriteRend;
 
     [SerializeField] private GameObject startPoint;
+    private bool invunerable;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,11 @@ public class Health : MonoBehaviour
     // Is called everytime te player gets damage
     public void TakeDamage(float _damage)
     {
+        if (invunerable)
+            return;
+        
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        Debug.Log(currentHealth);
 
         if (currentHealth > 0)
         {
@@ -35,14 +40,16 @@ public class Health : MonoBehaviour
         }
         else
         {
-            GetComponent<PlayerMovement>().enabled = false;
             player.transform.position = startPoint.transform.position;
-            GetComponent<PlayerMovement>().enabled = true;
+            startingHealth = 4;
+            currentHealth = startingHealth;
+            Debug.Log(currentHealth);
         }
     }
     private IEnumerator Invunerability()
     {
-        Physics2D.IgnoreLayerCollision(9, 10, true);
+        invunerable = true;
+        Physics2D.IgnoreLayerCollision(7, 8, true);
 
         for (int i = 0; i < numberOfFlashes; i++)
         {
@@ -52,6 +59,7 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
 
-        Physics2D.IgnoreLayerCollision(9, 10, false);
+        Physics2D.IgnoreLayerCollision(7, 8, false);
+        invunerable = false;
     }
 }

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/InputManager/KeyBoundAction.cs.meta
+guid: 2445ca9af1219cb408a8bc1068f7532b
+=======
 guid: 7fbb8cc879cf9f949b13a49aa851ffda
+>>>>>>> 23dccb507835af7626b7c058fcc3737460ca4c92:Assets/InputManager/Axis.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
