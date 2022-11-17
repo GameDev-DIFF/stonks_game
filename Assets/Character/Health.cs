@@ -40,10 +40,10 @@ public class Health : MonoBehaviour
         }
         else
         {
-            player.transform.position = startPoint.transform.position;
-            startingHealth = 4;
+            StartCoroutine(Invunerability());
             currentHealth = startingHealth;
             Debug.Log(currentHealth);
+            player.transform.position = new Vector2(startPoint.transform.position.x, startPoint.transform.position.y);
         }
     }
     private IEnumerator Invunerability()

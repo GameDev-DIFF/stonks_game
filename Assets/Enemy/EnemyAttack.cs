@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] protected float damage;
-    private EnemyMovement movement;
+    [SerializeField] private EnemyMovement movement;
 
     private void Awake()
     {
