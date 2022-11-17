@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Ladder
   - Bal
+  - AboveStair
+  - UnderneathStair
   layers:
   - Default
   - TransparentFX
