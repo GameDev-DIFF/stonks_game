@@ -8,13 +8,14 @@ TagManager:
   - Enemy
   - Ladder
   - Bal
+  - AboveStair
+  - UnderneathStair
   - Platform
   - Teleporter
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
   - Water
   - UI
   - Ground
