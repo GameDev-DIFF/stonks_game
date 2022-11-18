@@ -4,31 +4,18 @@ using UnityEngine;
 namespace Character.Scripts
 {
     public class StairScript : MonoBehaviour
-    {
-        [SerializeField] private bool isHigh;
-        [SerializeField] private Transform target;
-
-        private void Update()
-        {
-        }
-
+    { 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (GetComponent<Collider2D>().CompareTag("UnderneathStair"))
+            switch (GetComponent<Collider2D>().tag)
             {
-                Debug.Log("ondor");
-                Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, true);
+                case "UnderneathStair":
+                    Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, true);
+                    break;
+                case "AboveStair":
+                    Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, false);
+                    break;
             }
-            else if (GetComponent<Collider2D>().CompareTag("AboveStair"))
-            {
-                Debug.Log("bovon");
-                Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, false);
-            }
-
-            // if (col.gameObject.CompareTag("Player"))
-            // {
-                // Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col);
-            // }
         }
     }
 }
