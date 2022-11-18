@@ -7,6 +7,13 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private Rigidbody2D rb;
+
+
+    [SerializeField] private Transform ceilingCollider;
+    const float ceilingCheckRadius = 0.2f;
+
+
+    [SerializeField] private GameObject player;
     [SerializeField] private float speed;
     [SerializeField] private float distance;
     [SerializeField] private float jumpPower;
@@ -16,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform playerForm;
     private bool isCrouching = false;
     private bool isClimbing;
+    private RaycastHit2D raycastHit;
+    [SerializeField] private SpriteRenderer sprRend;
+    [SerializeField] private Sprite standingSprite;
+    [SerializeField] private Sprite crouchingSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -42,14 +53,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Checks if the player wants to crouch
-        if (InputManager.Instance.GetKey("Crouch"))
-        {
-            Crouch();
-        }
-        else
-        {
-            playerForm.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
+        Crouch();
 
         // Chances direction of player
 /*        if (horizontalInput > 0.01f)
@@ -73,7 +77,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Crouch()
     {
-        playerForm.transform.localScale = new Vector3(1f, 0.5f, 1f);
+        if (InputManager.Instance.GetKey("Crouch"))
+        {
+            sprRend.sprite = crouchingSprite;
+            standingCollider.enabled = false;
+            crouchingCollider.enabled = true;
+            isCrouching = true;
+        }
+        else
+        {
+            if (Physics2D.OverlapCircle(ceilingCollider.position, ceilingCheckRadius, groundLayer))
+            {
+                isCrouching = true;
+            }
+            else
+            {
+                sprRend.sprite = standingSprite;
+                standingCollider.enabled = true;
+                crouchingCollider.enabled = false;
+                isCrouching = false;
+            }
+        }
+        /*playerForm.transform.localScale = new Vector3(1f, 0.75f, 1f);*/
     }
 
     private void climbing()
@@ -99,7 +124,15 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(standingCollider.bounds.center, standingCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        if (!isCrouching)
+        {
+            raycastHit = Physics2D.BoxCast(standingCollider.bounds.center, standingCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        }
+        else
+        {
+            raycastHit = Physics2D.BoxCast(crouchingCollider.bounds.center, crouchingCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        }
+
         return raycastHit.collider != null;
     }
 }
