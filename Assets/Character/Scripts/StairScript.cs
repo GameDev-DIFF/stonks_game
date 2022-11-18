@@ -9,7 +9,6 @@ namespace Character.Scripts
  
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log(col.gameObject.tag);
             if (col.gameObject.CompareTag("Player"))
             {
                 transform.parent.GetComponent<Collider2D>().enabled = isHigh;
