@@ -1,15 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BallScript : MonoBehaviour
+namespace BallDispenser.Scripts
 {
-    private void OnCollisionEnter2D(Collision2D col)
+    public class BallScript : MonoBehaviour
     {
-        if (col.gameObject.CompareTag("Player"))
+        [SerializeField] private GameObject ballDispencer;
+
+        private void Start()
         {
-            col.gameObject.GetComponent<Health>()?.TakeDamage(1);
+            Physics2D.IgnoreCollision(ballDispencer.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>(), true);
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                col.gameObject.GetComponent<Health>()?.TakeDamage(1);
+            }
         }
     }
 }

@@ -1,37 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BallDispenserScript : MonoBehaviour
+namespace BallDispenser.Scripts
 {
-    private int seconds;
-    private BallDispenserScript ballDispencer;
-    [SerializeField] private GameObject[] ballInstance;
-    private int ballCount;
-
-    private void Start()
+    public class BallDispenserScript : MonoBehaviour
     {
-        ballDispencer = gameObject.GetComponent<BallDispenserScript>();
-    }
+        [SerializeField] private GameObject[] ballInstances;
+        [SerializeField] private float fireRateInSeconds = 3f;
+        [SerializeField] private float speed = 10f;
+        [SerializeField] private bool toTheLeft = true;
 
-    private void LateUpdate()
-    {
-        foreach (var t in ballInstance)
+        private int maxActiveBalls;
+        private BallDispenserScript ballDispenser;
+        private float seconds;
+        private int ballCount;
+
+        private void Start()
         {
-            var dinges = t.GetComponent<Rigidbody2D>().velocity;
-            t.GetComponent<Rigidbody2D>().velocity = 5f * dinges.normalized;
+            Debug.Log("start");
+            maxActiveBalls = ballInstances.Length;
+            ballDispenser = gameObject.GetComponent<BallDispenserScript>();
         }
-    }
 
-    void Update()
-    {
-        if (Time.time > seconds && ballCount < 3)
+        private void LateUpdate()
         {
-            ballInstance[ballCount].SetActive(true);
-            ballInstance[ballCount].transform.position = ballDispencer.transform.position;
-            ballInstance[ballCount].GetComponent<Rigidbody2D>().velocity = new Vector2(-10f, 0);
+            foreach (var ball in ballInstances)
+            {
+                var vel = ball.GetComponent<Rigidbody2D>().velocity;
+                ball.GetComponent<Rigidbody2D>().velocity = speed * vel.normalized;
+            }
+        }
 
-            seconds += 5;
+        void Update()
+        {
+            if (!(Time.time > seconds) || ballCount >= maxActiveBalls) return;
+        
+            ballInstances[ballCount].SetActive(true);
+            ballInstances[ballCount].transform.position = ballDispenser.transform.position;
+            ballInstances[ballCount].GetComponent<Rigidbody2D>().velocity = new Vector2(toTheLeft ? -10f : 10f, 0);
+
+            seconds += fireRateInSeconds;
             ballCount++;
         }
     }
