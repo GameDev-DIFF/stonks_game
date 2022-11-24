@@ -23,9 +23,19 @@ public class SpikeBall : MonoBehaviour
 
     private void Push()
     {
-        if(transform.rotation.z > 0)
+        if (transform.rotation.z > 0
+            && transform.rotation.z < rightPoint
+            && (rb.angularVelocity > 0)
+            && rb.angularVelocity < velocityThreshold)
         {
-
+            rb.angularVelocity = velocityThreshold;
+        }
+        else if (transform.rotation.z < 0
+            && transform.rotation.z > leftPoint
+            && (rb.angularVelocity < 0)
+            && rb.angularVelocity > velocityThreshold)
+        {
+            rb.angularVelocity = velocityThreshold;
         }
     }
 }
