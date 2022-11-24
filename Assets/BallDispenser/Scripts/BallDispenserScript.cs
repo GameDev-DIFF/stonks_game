@@ -39,7 +39,7 @@ namespace BallDispenser.Scripts
             ballInstances[ballCount].GetComponent<Rigidbody2D>().velocity = new Vector2(toTheLeft ? -10f : 10f, 0);
 
             seconds += fireRateInSeconds;
-            ballCount = ballCount >= maxActiveBalls ? 0 : ballCount + 1;
+            ballCount = ballCount + 1 >= maxActiveBalls ? 0 : ballCount + 1;
         }
     }
 }
