@@ -3,16 +3,17 @@ using UnityEngine;
 namespace Character.Scripts
 {
     public class StairScript : MonoBehaviour
-    {
-        [SerializeField] private bool isHigh;
-        [SerializeField] private Transform target;
- 
+    { 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log(col.gameObject.tag);
-            if (col.gameObject.CompareTag("Player"))
+            switch (GetComponent<Collider2D>().tag)
             {
-                transform.parent.GetComponent<Collider2D>().enabled = isHigh;
+                case "UnderneathStair":
+                    Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, true);
+                    break;
+                case "AboveStair":
+                    Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), col, false);
+                    break;
             }
         }
     }
