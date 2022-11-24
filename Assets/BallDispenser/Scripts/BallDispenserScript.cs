@@ -16,7 +16,6 @@ namespace BallDispenser.Scripts
 
         private void Start()
         {
-            Debug.Log("start");
             maxActiveBalls = ballInstances.Length;
             ballDispenser = gameObject.GetComponent<BallDispenserScript>();
         }
@@ -32,14 +31,15 @@ namespace BallDispenser.Scripts
 
         void Update()
         {
-            if (!(Time.time > seconds) || ballCount >= maxActiveBalls) return;
-        
+            if (!(Time.time > seconds) || ballInstances[ballCount].activeSelf) return;
+            
             ballInstances[ballCount].SetActive(true);
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), ballInstances[ballCount].GetComponent<CircleCollider2D>(), true);
             ballInstances[ballCount].transform.position = ballDispenser.transform.position;
             ballInstances[ballCount].GetComponent<Rigidbody2D>().velocity = new Vector2(toTheLeft ? -10f : 10f, 0);
 
             seconds += fireRateInSeconds;
-            ballCount++;
+            ballCount = ballCount >= maxActiveBalls ? 0 : ballCount + 1;
         }
     }
 }
