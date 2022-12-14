@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Platform
   - Teleporter
+  - Ball
   layers:
   - Default
   - TransparentFX
