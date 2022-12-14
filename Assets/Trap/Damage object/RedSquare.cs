@@ -11,7 +11,6 @@ public class RedSquare : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Health>()?.TakeDamage(damage);
-            collision.gameObject.GetComponent<Health>().TakeDamage(damage);
 
             var force = transform.position - collision.transform.position;
             force.Normalize();
