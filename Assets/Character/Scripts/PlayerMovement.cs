@@ -54,16 +54,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Checks if the player wants to crouch
         Crouch();
-
-        // Chances direction of player
-/*        if (horizontalInput > 0.01f)
-        {
-            transform.localScale = Vector3.one;
-        }
-        else if (horizontalInput < -0.01f)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }*/
     }
 
     private void Jump()
@@ -98,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
                 isCrouching = false;
             }
         }
-        /*playerForm.transform.localScale = new Vector3(1f, 0.75f, 1f);*/
     }
 
     private void climbing()

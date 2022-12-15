@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class InteractScript : MonoBehaviour
 {
     public GameObject dialoguePanel;
+    [SerializeField] private Transform cameraTransform;
+    public GameObject pressKey;
+    public Camera mainCamera;
     public Text dialogueText;
     public string[] dialogue;
     private int index;
@@ -31,6 +34,7 @@ public class InteractScript : MonoBehaviour
             }
             else
             {
+                dialogueText.text = "";
                 dialoguePanel.SetActive(true);
                 StartCoroutine(Typing());
             }
@@ -85,15 +89,26 @@ public class InteractScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsClose = true;
+            pressKey.SetActive(true);
+            mainCamera.orthographicSize = 16;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        StartCoroutine(waiter(collision));
+    }
+
+    IEnumerator waiter(Collider2D collision)
+    {
+        //Wait for 2 seconds
+        yield return new WaitForSeconds(2);
         if (collision.CompareTag("Player"))
         {
+            mainCamera.orthographicSize = 5;
             playerIsClose = false;
             zeroText();
+            pressKey.SetActive(false);
         }
     }
 }
