@@ -9,7 +9,10 @@ TagManager:
   - Ladder
   - Platform
   - Teleporter
+  - UnderneathStair
+  - AboveStair
   - Ball
+  - PlayerInteraction
   layers:
   - Default
   - TransparentFX
