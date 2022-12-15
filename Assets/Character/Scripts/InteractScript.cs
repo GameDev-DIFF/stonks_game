@@ -17,7 +17,6 @@ public class InteractScript : MonoBehaviour
     public float wordSpeed;
     public bool playerIsClose;
 
-
     private void Start()
     {
         nextClick = false;
@@ -86,7 +85,7 @@ public class InteractScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerInteraction"))
         {
             playerIsClose = true;
             pressKey.SetActive(true);
@@ -96,14 +95,7 @@ public class InteractScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(waiter(collision));
-    }
-
-    IEnumerator waiter(Collider2D collision)
-    {
-        //Wait for 2 seconds
-        yield return new WaitForSeconds(2);
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerInteraction"))
         {
             mainCamera.orthographicSize = 5;
             playerIsClose = false;
