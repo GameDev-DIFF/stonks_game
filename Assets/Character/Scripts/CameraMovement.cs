@@ -5,8 +5,10 @@ public class CameraMovement : MonoBehaviour
     private float SmoothValue = 0.15f;
     private Vector3 velocity = Vector3.zero;
     private bool isHigh;
+    public bool changedCamera = false;
     private PlayerMovement playerMovement;
-    
+    public bool revealSecret = false;
+
     [SerializeField] private Transform target;
 
     private void Awake()
@@ -43,7 +45,21 @@ public class CameraMovement : MonoBehaviour
                 break;
         }
 
-        Vector3 targetPosition = new Vector3(target.position.x, y, -10f);
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothValue);
+        if (changedCamera)
+        {
+            Vector3 targetPosition = new Vector3(target.position.x, y + 14.5f, -10f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothValue);
+        }
+        else
+        {
+            Vector3 targetPosition = new Vector3(target.position.x, y, -10f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothValue);
+        }
+
+        if (revealSecret)
+        {
+            Vector3 targetPosition = new Vector3(target.position.x, y + 4, -10f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothValue);
+        }
     }
 }

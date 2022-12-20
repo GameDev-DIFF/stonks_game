@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class InteractScript : MonoBehaviour
 {
     public GameObject dialoguePanel;
-    [SerializeField] private Transform cameraTransform;
     public GameObject pressKey;
-    public Camera mainCamera;
     public Text dialogueText;
     public string[] dialogue;
     private int index;
@@ -87,9 +85,9 @@ public class InteractScript : MonoBehaviour
     {
         if (collision.CompareTag("PlayerInteraction"))
         {
+            Debug.Log("ez");
             playerIsClose = true;
             pressKey.SetActive(true);
-            mainCamera.orthographicSize = 16;
         }
     }
 
@@ -97,7 +95,6 @@ public class InteractScript : MonoBehaviour
     {
         if (collision.CompareTag("PlayerInteraction"))
         {
-            mainCamera.orthographicSize = 5;
             playerIsClose = false;
             zeroText();
             pressKey.SetActive(false);
